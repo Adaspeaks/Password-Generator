@@ -18,9 +18,32 @@ function generatePassword(){
    } 
     //failsafe
     else {
-      alert('Please enter a number between 8 and 128')
-      return '';
+      alert('Please enter a number between 8 and 128');
     }
+    //usercheck for parameters for wantedChar
+  var passUpper = confirm ('Do you want to include uppercase letters (A-Z) in your password?')
+  var passLower = confirm ('Do you want to include lowercase letters (a-z) in your password?')
+  var passSpec = confirm ('Do you want to include special characters \n(!"#$%&\'*+,-./:;<=>?@^_`{|}~()[]")\n in your password?')
+  var passNumbers = confirm ('Do you want to include numbers (0-9) in your password?')
+    //end of usercheck
+    if (passUpper) {
+      wantedChar += uppercase
+    }
+    if (passLower) {
+      wantedChar += lowercase
+    }
+    if (passSpec) {
+      wantedChar += specChar
+    }
+    if (passNumbers) {
+      wantedChar += numbers
+    }
+      //failsafe to check for a selected parameter
+      if (
+        !passUpper && !passLower && !passSpec && !passNumbers
+        ) {
+        return alert('Please select at least one parameter!');
+      }
 }
 
 // Write password to the #password input
