@@ -7,8 +7,6 @@ var numbers = '1234567890';
 var wantedChar = '';
 var password = '';
 
-//end of Global Variables
-
 //generator
 function generatePassword(){
   var pwLength = prompt('Declare a password length\nMust be a number within 8-128')
@@ -17,8 +15,10 @@ function generatePassword(){
       console.log(pwLength)
    } 
     //failsafe
+    //function runs on otherwise if else statment is not present
     else {
-      alert('Please enter a number between 8 and 128');
+      alert('Please enter a number between 8 and 128')
+      return;
     }
     //usercheck for parameters for wantedChar
   var passUpper = confirm ('Do you want to include uppercase letters (A-Z) in your password?')
@@ -26,6 +26,8 @@ function generatePassword(){
   var passSpec = confirm ('Do you want to include special characters \n(!"#$%&\'*+,-./:;<=>?@^_`{|}~()[]")\n in your password?')
   var passNumbers = confirm ('Do you want to include numbers (0-9) in your password?')
     //end of usercheck
+
+    //checks each confirm condition
     if (passUpper) {
       wantedChar += uppercase
     }
@@ -44,17 +46,23 @@ function generatePassword(){
         ) {
         return alert('Please select at least one parameter!');
       }
+      //sets password length to previous length specified A
+      //randomizes all the chosen letters and characters B
+      //chooses characters and sets B=A
+  for (let i = 0; i < pwLength; i++) {
+    password +=wantedChar[Math.floor(Math.random() * wantedChar.length)];
+  }
+  //returns password to the writePassword function
+  return password;
 }
 
 // Write password to the #password input
 function writePassword() {
-  var password = generatePassword();
-  var passwordText = document.querySelector('#password');
-
+  let password = generatePassword();
+  let passwordText = document.querySelector('#password');
   passwordText.value = password;
- 
 }
 
-// Add event listener to generate button
+// Add event listener to generate button on click
 generateBtn.addEventListener('click', writePassword);
 //activates writePassword code block
